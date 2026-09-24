@@ -1,532 +1,411 @@
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quotepilote — Le devis n'attend plus votre déplacement</title>
-<meta name="description" content="Quotepilote envoie un devis professionnel en 90 secondes pour les entreprises de nettoyage. Vous ne vous déplacez que pour les prospects déjà décidés.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230C0D0F'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23C9A24B' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0C0D0F;
-    --panel:#16171B;
-    --brass:#C9A24B;
-    --brass-dim:#8A7434;
-    --paper:#F3EFE6;
-    --muted:#8C8B87;
-    --line: rgba(243,239,230,0.12);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'Inter',sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit; text-decoration:none;}
-  .wrap{
-    max-width:960px;
-    margin:0 auto;
-    padding:0 24px;
-  }
-  em{
-    font-style:italic;
-    color:var(--brass);
-    font-weight:300;
-  }
-
-  /* NAV */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(12,13,15,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 24px;
-    max-width:960px;
-    margin:0 auto;
-  }
-  .logo{
-    font-family:'Fraunces', serif;
-    font-size:18px;
-    letter-spacing:0.01em;
-    font-weight:500;
-  }
-  .logo em{font-weight:300;}
-  .nav-cta{
-    border:1px solid var(--brass-dim);
-    color:var(--brass);
-    font-size:13px;
-    padding:9px 18px;
-    border-radius:2px;
-    transition:background 0.2s ease, color 0.2s ease;
-  }
-  .nav-cta:hover{background:var(--brass); color:#181205;}
-
-  /* HERO */
-  .hero{
-    padding:110px 0 90px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero::before{
-    content:"";
-    position:absolute; top:-20%; left:50%;
-    transform:translateX(-50%);
-    width:600px; height:600px;
-    background:radial-gradient(circle, rgba(201,162,75,0.10), transparent 70%);
-    pointer-events:none;
-  }
-  .eyebrow{
-    font-size:11px;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    color:var(--brass);
-    font-weight:600;
-    display:inline-flex; align-items:center; gap:10px;
-    margin-bottom:26px;
-  }
-  .eyebrow::before, .eyebrow::after{content:""; width:20px; height:1px; background:var(--brass-dim);}
-  .hero h1{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:clamp(34px, 6vw, 58px);
-    line-height:1.08;
-    letter-spacing:-0.01em;
-    max-width:820px;
-    margin:0 auto;
-    position:relative;
-  }
-  .hero .sub{
-    max-width:560px;
-    margin:26px auto 0;
-    color:var(--muted);
-    font-size:16px;
-    position:relative;
-  }
-  .hero .cta-row{
-    margin-top:40px;
-    position:relative;
-  }
-  .cta-primary{
-    display:inline-block;
-    background:var(--brass);
-    color:#181205;
-    font-weight:600;
-    font-size:14px;
-    padding:15px 32px;
-    border-radius:2px;
-    transition:transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .cta-primary:hover{transform:translateY(-1px); box-shadow:0 10px 30px rgba(201,162,75,0.18);}
-  .social-proof{
-    margin-top:22px;
-    font-size:12.5px;
-    color:var(--muted);
-    letter-spacing:0.02em;
-    position:relative;
-  }
-  .social-proof span{color:var(--brass); font-weight:500;}
-
-  /* SECTIONS */
-  section{padding:90px 0;}
-  .divider{border-top:1px solid var(--line);}
-  h2{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:clamp(26px, 4vw, 36px);
-    line-height:1.2;
-    max-width:640px;
-  }
-  .lead{
-    max-width:600px;
-    color:var(--muted);
-    font-size:15.5px;
-    margin-top:20px;
-  }
-
-  /* AVANT/APRES */
-  .compare{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1px;
-    margin-top:48px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .compare-col{
-    background:var(--ink);
-    padding:38px 34px;
-  }
-  .compare-col.after{background:var(--panel);}
-  .compare-label{
-    font-size:11px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:16px;
-  }
-  .compare-col.after .compare-label{color:var(--brass);}
-  .compare-col p{
-    font-size:15px;
-    line-height:1.6;
-  }
-  .compare-col.after p{color:var(--paper);}
-  .compare-col.before p{color:var(--muted);}
-
-  /* BENEFITS */
-  .benefits{
-    margin-top:48px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px 40px;
-  }
-  .benefit{
-    padding-top:22px;
-    border-top:1px solid var(--line);
-  }
-  .benefit p{font-size:15px; color:var(--paper);}
-
-  /* VIDEO DEMO */
-  .video-frame{
-    margin-top:44px;
-    position:relative;
-    width:100%;
-    padding-top:56.25%; /* 16:9 */
-    background:var(--panel);
-    border:1px solid var(--line);
-    overflow:hidden;
-  }
-  .video-frame iframe,
-  .video-frame video{
-    position:absolute; top:0; left:0;
-    width:100%; height:100%;
-    border:0;
-    object-fit:cover;
-    object-position:center top;
-  }
-
-  /* SIGNATURE QUOTE */
-  .signature{
-    background:var(--panel);
-    padding:100px 0;
-    text-align:center;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-  }
-  .signature blockquote{
-    font-family:'Fraunces', serif;
-    font-weight:300;
-    font-style:italic;
-    font-size:clamp(22px, 3.6vw, 32px);
-    line-height:1.4;
-    max-width:680px;
-    margin:0 auto;
-    color:var(--paper);
-  }
-  .signature blockquote em{color:var(--brass); font-style:italic;}
-
-  /* FORM */
-  .demo{text-align:center;}
-  .demo h2{margin:0 auto; text-align:center;}
-  .demo .lead{margin-left:auto; margin-right:auto; text-align:center;}
-  form{
-    max-width:420px;
-    margin:44px auto 0;
-    text-align:left;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  label{
-    font-size:12px;
-    letter-spacing:0.05em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:6px;
-    display:block;
-  }
-  input{
-    width:100%;
-    background:var(--panel);
-    border:1px solid var(--line);
-    color:var(--paper);
-    font-family:'Inter',sans-serif;
-    font-size:15px;
-    padding:13px 14px;
-    border-radius:2px;
-    outline:none;
-    transition:border-color 0.2s ease;
-  }
-  input:focus{border-color:var(--brass-dim);}
-  input::placeholder{color:#5c5b57;}
-  button[type="submit"]{
-    margin-top:8px;
-    background:var(--brass);
-    color:#181205;
-    font-weight:600;
-    font-size:14.5px;
-    padding:15px;
-    border:none;
-    border-radius:2px;
-    cursor:pointer;
-    transition:transform 0.2s ease;
-  }
-  button[type="submit"]:hover{transform:translateY(-1px);}
-  .form-note{
-    font-size:12.5px;
-    color:var(--muted);
-    margin-top:16px;
-    text-align:center;
-  }
-  .form-status{
-    font-size:13.5px;
-    text-align:center;
-    margin-top:14px;
-    min-height:18px;
-  }
-
-  /* FOOTER */
-  footer{
-    padding:40px 0;
-    border-top:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    font-size:13px;
-    color:var(--muted);
-    flex-wrap:wrap;
-    gap:14px;
-  }
-  footer .brand{font-family:'Fraunces', serif; color:var(--paper);}
-  footer nav.foot-links{display:flex; gap:20px;}
-  footer nav.foot-links a{color:var(--muted); transition:color 0.2s ease;}
-  footer nav.foot-links a:hover{color:var(--brass);}
-
-  /* LEGAL MODAL */
-  #legal-modal{
-    display:none;
-    position:fixed; inset:0;
-    background:rgba(0,0,0,0.75);
-    z-index:100;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-  }
-  #legal-modal.open{display:flex;}
-  .legal-box{
-    background:var(--panel);
-    border:1px solid var(--line);
-    max-width:520px;
-    width:100%;
-    padding:36px;
-    max-height:80vh;
-    overflow-y:auto;
-  }
-  .legal-box h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:20px;
-    margin-bottom:18px;
-  }
-  .legal-box p{font-size:13.5px; color:var(--muted); margin-bottom:10px;}
-  .legal-close{
-    display:inline-block;
-    margin-top:18px;
-    font-size:13px;
-    color:var(--brass);
-    cursor:pointer;
-  }
-
-  @media (max-width: 720px){
-    .compare{grid-template-columns:1fr;}
-    .benefits{grid-template-columns:1fr;}
-    section{padding:64px 0;}
-    .hero{padding:80px 0 60px;}
-    footer{flex-direction:column; align-items:flex-start;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{transition:none !important;}
-  }
-</style>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1016069524798256');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1016069524798256&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Quotepilote — Logiciel de devis pour entreprises de nettoyage</title>
+<meta name="description" content="Logiciel de devis pour entreprises de nettoyage : votre client reçoit un devis PDF à votre nom en 90 secondes, sur votre site. 1er mois offert.">
+<link rel="canonical" href="https://quotepilote.fr/">
+<meta name="theme-color" content="#0F3D33">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Quotepilote">
+<meta property="og:title" content="Quotepilote — Logiciel de devis pour entreprises de nettoyage">
+<meta property="og:description" content="Logiciel de devis pour entreprises de nettoyage : votre client reçoit un devis PDF à votre nom en 90 secondes, sur votre site. 1er mois offert.">
+<meta property="og:url" content="https://quotepilote.fr/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F3D33'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-style='italic' font-size='36' fill='%23fff' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=9">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Quotepilote","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://quotepilote.fr/","description":"Logiciel de devis automatique pour les entreprises de nettoyage.","offers":{"@type":"Offer","price":"99","priceCurrency":"EUR"}}</script>
 </head>
 <body>
+<a class="skip" href="#main">Aller au contenu</a>
 
-<header>
-  <nav>
-    <div class="logo">Quote<em>pilote</em></div>
-    <a href="#demo" class="nav-cta">Demander une démo</a>
+<header class="top" id="top">
+  <nav class="bar wrap" aria-label="Navigation principale">
+    <a href="/" class="logo"><span class="logo-mark">Q</span>Quotepilote</a>
+    <div class="nav-links">
+      <a href="#demo">Essayer</a>
+      <a href="#fonctionnement">Comment ça marche</a>
+      <a href="#tarif">Tarif</a>
+      <a href="#faq">Questions</a>
+    </div>
+    <a href="#contact" class="btn btn-primary" data-cta="nav">Mois offert</a>
   </nav>
 </header>
 
-<main>
-  <section class="hero wrap">
-    <div class="eyebrow">Nettoyage professionnel · France</div>
-    <h1>Le devis n'attend plus <em>votre déplacement.</em></h1>
-    <p class="sub">Vous ne perdez plus vos après-midi à vous déplacer pour des prospects qui ne signeront jamais. Quotepilote envoie un devis professionnel en 90 secondes — vous ne bougez que pour ceux qui sont déjà décidés.</p>
-    <div class="cta-row">
-      <a href="#demo" class="cta-primary">Demander une démo</a>
-    </div>
-    <p class="social-proof">Déjà utilisé par des <span>professionnels du nettoyage</span> en Île-de-France</p>
-  </section>
-
-  <section class="wrap divider">
-    <h2>Chaque déplacement, c'est <em>une heure</em> de votre journée.</h2>
-    <p class="lead">Sur dix rendez-vous pour un devis, combien se transforment vraiment en client ? Le problème n'a jamais été votre travail. C'est le temps perdu à convaincre des gens qui n'étaient même pas prêts.</p>
-
-    <div class="compare">
-      <div class="compare-col before">
-        <div class="compare-label">Avant</div>
-        <p>Un appel. Un déplacement. Une estimation à l'aveugle. Et parfois rien derrière.</p>
+<main id="main">
+  <!-- HERO + DÉMO EN DIRECT -->
+  <section class="hero" id="demo">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="kicker">Logiciel de devis pour entreprises de nettoyage</span>
+        <h1>Le devis part <em>avant</em> que votre prospect appelle le concurrent.</h1>
+        <p class="for-who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg>Pour les entreprises de nettoyage qui ont un site web</p>
+        <p class="sub">Votre client remplit un formulaire sur votre site. 90 secondes plus tard, il reçoit un devis PDF à votre nom, calculé avec vos tarifs. Vous ne vous déplacez plus que chez ceux qui ont déjà vu le prix.</p>
+        <ul class="reassure">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Installé pour vous en 48 h</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>1er mois offert</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Sans engagement</li>
+        </ul>
+        <p class="arrow-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Essayez-le maintenant, comme si vous étiez votre client.</p>
       </div>
-      <div class="compare-col after">
-        <div class="compare-label">Avec Quotepilote</div>
-        <p>Un devis clair envoyé en 90 secondes. Le prospect se décide seul. Vous ne vous déplacez que pour le constat final, chez ceux qui ont déjà dit oui.</p>
+
+      <div id="demo-widget">
+        <div class="demo-head">
+          <b>Démo en direct</b>
+          <ol class="stepper" id="stepper" aria-label="Étapes de la démo">
+            <li class="on" data-s="1"><i>1</i><span>Demande</span></li>
+            <li data-s="2"><i>2</i><span>Inscription</span></li>
+            <li data-s="3"><i>3</i><span>Devis reçu</span></li>
+          </ol>
+        </div>
+        <div class="widget-shell">
+          <div class="widget-bar" aria-hidden="true"><i></i><i></i><i></i><span>www.votre-entreprise.fr/devis</span></div>
+          <div class="role-banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Vous êtes le client : faites une demande de devis</div>
+
+          <!-- Étape 1 : la demande (le vrai formulaire) -->
+          <form class="pane" id="req-form" novalidate>
+            <h2 class="ptitle">Nettoyage canapé &amp; tissus</h2>
+            <p class="hint">Obtenez votre prix en 30 secondes.</p>
+            <div class="f-grid">
+              <div class="m-full"><label for="r-type">Meuble à nettoyer</label>
+                <select id="r-type" name="meubleType" required>
+                  <option value="Canapé 2/3 places">Canapé 2/3 places</option>
+                  <option value="Canapé 4/5 places" selected>Canapé 4/5 places</option>
+                  <option value="Canapé en U">Canapé en U</option>
+                  <option value="Fauteuil">Fauteuil</option>
+                  <option value="Pouf">Pouf</option>
+                  <option value="Chaises (lot de 4/6)">Chaises (lot de 4/6)</option>
+                </select></div>
+              <div class="m-full"><label for="r-qty">Quantité</label><input id="r-qty" name="quantite" type="number" min="1" max="10" value="1" required inputmode="numeric"></div>
+              <div class="full"><label id="r-pb-l">Problèmes constatés (facultatif)</label>
+                <div class="chips" role="group" aria-labelledby="r-pb-l">
+                  <label class="chip"><input type="checkbox" name="problemes" value="Pipi de chat ou de chien"> Urine animale</label>
+                  <label class="chip"><input type="checkbox" name="problemes" value="Transpiration"> Transpiration</label>
+                  <label class="chip"><input type="checkbox" name="problemes" value="Nourriture et boisson"> Taches alimentaires</label>
+                  <label class="chip"><input type="checkbox" name="problemes" value="Odeur de cigarette"> Odeur de tabac</label>
+                </div></div>
+              <div><label for="r-city">Ville</label><input id="r-city" name="ville" required autocomplete="address-level2" placeholder="Montreuil"></div>
+              <div><label for="r-cp">Code postal</label><input id="r-cp" name="codePostal" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" placeholder="93100"></div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="req-submit">Calculer mon devis</button>
+            <p class="form-msg" id="req-msg" role="status" aria-live="polite"></p>
+          </form>
+
+          <!-- Étape 2 : devis prêt mais verrouillé → inscription -->
+          <form class="pane" id="gate-form" action="https://formspree.io/f/xeajvlen" method="POST" hidden>
+            <div class="locked" aria-label="Aperçu du devis">
+              <div class="lq-top"><b>Devis N° <span id="lq-num">2026-0000</span></b><span>Démo Quotepilote</span></div>
+              <div id="lq-rows"></div>
+              <div class="lq-total"><span>Total</span><b id="lq-total">0 €</b></div>
+              <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>PDF verrouillé</span>
+            </div>
+            <h2 class="ptitle gate-title">Votre devis est prêt.</h2>
+            <p class="hint">Pour le recevoir par email en 90 secondes, inscrivez-vous. C'est exactement ce que recevront vos propres clients.</p>
+            <div class="f-grid">
+              <div><label for="g-name">Votre nom</label><input id="g-name" name="nom" required autocomplete="name"></div>
+              <div><label for="g-company">Entreprise</label><input id="g-company" name="entreprise" required autocomplete="organization"></div>
+              <div class="m-full"><label for="g-email">Email</label><input id="g-email" name="email" type="email" required autocomplete="email" placeholder="vous@entreprise.fr"></div>
+              <div class="m-full"><label for="g-phone">Téléphone</label><input id="g-phone" name="telephone" type="tel" required autocomplete="tel" placeholder="06 12 34 56 78" pattern="[0-9 +.\(\)\-]{10,}"></div>
+              <div><label for="g-role">Votre rôle</label>
+                <select id="g-role" name="role" required>
+                  <option value="" disabled selected>Choisir…</option>
+                  <option>Gérant / dirigeant</option><option>Associé</option><option>Responsable commercial</option><option>Autre</option>
+                </select></div>
+              <div><label for="g-size">Effectif</label>
+                <select id="g-size" name="effectif" required>
+                  <option value="" disabled selected>Choisir…</option>
+                  <option>Seul</option><option>2 à 5</option><option>6 à 20</option><option>21 à 50</option><option>Plus de 50</option>
+                </select></div>
+              <div class="full"><label id="g-site-l">Votre entreprise a-t-elle un site web ?</label>
+                <div class="seg" role="radiogroup" aria-labelledby="g-site-l">
+                  <label><input type="radio" name="site_web" value="Oui" id="g-site-y" required> Oui</label>
+                  <label><input type="radio" name="site_web" value="Non" id="g-site-n"> Non</label>
+                </div></div>
+            </div>
+            <input type="hidden" name="_subject" value="Quotepilote — inscription démo (à rappeler)">
+            <input type="hidden" name="type" value="Inscription démo">
+            <input type="hidden" name="demande" id="g-demande" value="">
+            <input type="hidden" name="source" class="utm-src" value="site">
+            <div class="hp" aria-hidden="true"><label for="g-hp">Ne pas remplir</label><input id="g-hp" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+            <button type="submit" class="btn btn-primary" id="gate-submit">Recevoir mon devis par email</button>
+            <p class="form-msg" id="gate-msg" role="status" aria-live="polite"></p>
+            <p class="legal-note">Gratuit. Vos coordonnées servent à vous envoyer ce devis de démo et à vous recontacter au sujet de Quotepilote. <a href="/confidentialite">Confidentialité</a>.</p>
+          </form>
+
+          <!-- Étape 3 : envoyé -->
+          <div class="pane result" id="demo-result" hidden role="status" aria-live="polite">
+            <div class="ring" aria-hidden="true">
+              <svg viewBox="0 0 120 120" width="132" height="132"><circle cx="60" cy="60" r="54" fill="none" stroke="#E3F1EB" stroke-width="8"/><circle id="ring" cx="60" cy="60" r="54" fill="none" stroke="#17624F" stroke-width="8" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="0"/></svg>
+              <b id="ring-n">90</b>
+            </div>
+            <h2 class="ptitle" id="res-title">Votre devis est en route…</h2>
+            <p class="hint" id="res-text" style="margin-top:8px">Il arrive dans la boîte <strong id="res-email"></strong>. Pensez aux indésirables.</p>
+            <div class="after" id="after" hidden>
+              <p class="after-title">Imaginez ça sur votre site.</p>
+              <p>Ce devis, vos prospects le reçoivent à 21 h un dimanche, pendant que vos concurrents rappelleront lundi. On l'installe avec vos tarifs en 48 h.</p>
+              <a href="#tarif" class="btn btn-primary" data-cta="after-demo">Voir le tarif et le mois offert</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="wrap divider">
-    <h2>Ce que vous <em>récupérez.</em></h2>
-    <div class="benefits">
-      <div class="benefit"><p>Vos après-midi, pour de vrais clients</p></div>
-      <div class="benefit"><p>Une réponse immédiate, pendant que le prospect est encore chaud</p></div>
-      <div class="benefit"><p>Une image professionnelle dès le premier contact</p></div>
-      <div class="benefit"><p>Zéro trajet pour rien</p></div>
+  <!-- PROOF -->
+  <div class="proof">
+    <div class="wrap proof-grid">
+      <div><b>90 s</b><span>pour envoyer le devis</span></div>
+      <div><b>24 h/24</b><span>même le dimanche soir</span></div>
+      <div><b>0</b><span>déplacement pour chiffrer</span></div>
+      <div><b>Vos tarifs</b><span>votre nom, votre logo</span></div>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section id="probleme">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Le problème</span>
+        <h2>Le client signe avec <em>celui qui répond le premier.</em></h2>
+        <p>Pendant que vous êtes sur un chantier, la demande de devis attend. Le soir, le prospect a déjà un prix ailleurs. Et quand vous vous déplacez pour chiffrer, une fois sur deux, ça ne donne rien.</p>
+      </div>
+      <div class="compare">
+        <div class="col">
+          <h3>Aujourd'hui</h3>
+          <ul>
+            <li>Un appel, un rendez-vous, un trajet pour chiffrer</li>
+            <li>Un devis tapé le soir, envoyé 2 jours après</li>
+            <li>Des prospects qui « réfléchissent » et disparaissent</li>
+            <li>Des après-midi perdus à convaincre</li>
+          </ul>
+        </div>
+        <div class="col after-col">
+          <h3>Avec Quotepilote</h3>
+          <ul>
+            <li>Le prospect reçoit son devis en 90 secondes</li>
+            <li>Il se décide seul, pendant qu'il est encore motivé</li>
+            <li>Vous recevez une copie et ses coordonnées</li>
+            <li>Vous ne vous déplacez que chez ceux qui ont dit oui</li>
+          </ul>
+        </div>
+      </div>
+      <div class="calc" id="calc">
+        <div>
+          <label for="c-req">Demandes de devis par mois <output id="o-req">20</output></label>
+          <input type="range" id="c-req" min="5" max="150" step="5" value="20">
+          <label for="c-lost">Perdues faute de réponse rapide <output id="o-lost">20 %</output></label>
+          <input type="range" id="c-lost" min="5" max="50" step="5" value="20">
+          <label for="c-avg">Montant moyen d'un chantier <output id="o-avg">150 €</output></label>
+          <input type="range" id="c-avg" min="50" max="2000" step="50" value="150">
+        </div>
+        <div class="out" aria-live="polite">
+          <small>Chiffre d'affaires qui part chez vos concurrents</small>
+          <div class="big" id="o-total">600 € / mois</div>
+          <p id="o-year">Soit 7 200 € par an.</p>
+        </div>
+      </div>
+      <p class="calc-note">Estimation calculée avec vos propres chiffres. Ajustez les curseurs.</p>
     </div>
   </section>
 
-  <section class="wrap divider" id="essai">
-    <h2>Voyez-le. <em>En vrai.</em></h2>
-    <p class="lead">90 secondes pour voir un devis se générer sur un vrai site, en conditions réelles.</p>
+  <!-- HOW -->
+  <section id="fonctionnement" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Comment ça marche</span>
+        <h2>Trois étapes. <em>Aucune</em> ne vous demande quelque chose.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>On installe sur votre site</h3><p>Vous nous envoyez votre grille de prix (même une photo ou un Excel). On paramètre vos prestations et on ajoute le formulaire à votre site WordPress, Wix ou autre, en 48 h.</p></div>
+        <div class="step"><h3>Votre client remplit</h3><p>Type de prestation, quantité, état, adresse : moins d'une minute. Il obtient son prix sans attendre votre rappel.</p></div>
+        <div class="step"><h3>Le devis part tout seul</h3><p>Il reçoit un PDF à votre nom par email. Vous recevez une copie avec ses coordonnées pour le rappeler.</p></div>
+      </div>
+    </div>
+  </section>
 
-    <div class="video-frame">
-  <video controls style="width:100%;height:100%;display:block;">
-    <source src="/Devis_nettoyage_ameliore.mp4" type="video/mp4">
-  </video>
-</div>
+  <!-- BENEFITS -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Ce que vous récupérez</span>
+        <h2>Plus de clients, <em>moins de route.</em></h2>
+      </div>
+      <div class="benefits">
+        <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Vos après-midi</h3><p>Chaque visite pour chiffrer évitée, c'est 1 à 2 heures de travail et de trajet rendues.</p></div></div>
+        <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><div><h3>Une réponse immédiate</h3><p>Le devis part pendant que le prospect est encore décidé, même à 22 h.</p></div></div>
+        <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div><div><h3>Une image pro</h3><p>Un devis propre et détaillé, à votre en-tête, dès le premier contact.</p></div></div>
+        <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><div><h3>Des prospects qualifiés</h3><p>Ceux qui vous rappellent connaissent déjà le prix et l'acceptent.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE -->
+  <section id="cas" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Déjà en place</span>
+        <h2>Prestige Propre, <em>La Courneuve.</em></h2>
+      </div>
+      <div class="case">
+        <div>
+          <p style="font-size:17px;color:var(--ink-2)">Entreprise de nettoyage de canapés et tissus d'ameublement en Seine-Saint-Denis. C'est sa grille qui fait tourner la démo en haut de cette page.</p>
+          <ul>
+            <li>Grille de prix configurée dans Quotepilote</li>
+            <li>Formulaire de devis intégré à son site WordPress</li>
+            <li>Devis PDF envoyé automatiquement à chaque demande</li>
+            <li>Chaque demande arrive pré-qualifiée : meuble, quantité, taches, adresse</li>
+          </ul>
+        </div>
+        <div class="grid-prices">
+          <h3 class="gp-title">Sa grille dans Quotepilote</h3>
+          <div><span>Fauteuil</span><b>40 €</b></div>
+          <div><span>Canapé 2/3 places</span><b>60 €</b></div>
+          <div><span>Canapé 4/5 places</span><b>70 €</b></div>
+          <div><span>Canapé en U</span><b>80 €</b></div>
+          <div><span>Chaises (lot de 4/6)</span><b>50 €</b></div>
+          <div><span>Pouf</span><b>19 €</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="tarif" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Tarif affiché, sans surprise</span>
+        <h2>Plus vous restez, <em>moins vous payez.</em></h2>
+        <p>Pas besoin de rendez-vous pour connaître le prix. Le voici.</p>
+      </div>
+      <div class="price">
+        <div>
+          <ul class="tiers">
+            <li class="free"><div class="l"><b>1er mois</b><span>Installation et paramétrage inclus</span></div><div class="p">Offert</div></li>
+            <li><div class="l"><b>Mois 2 à 6</b><span>Sans engagement</span></div><div class="p">99 €<small> HT/mois</small></div></li>
+            <li><div class="l"><b>Mois 7 à 12</b><span>Tarif fidélité</span></div><div class="p">89 €<small> HT/mois</small></div></li>
+            <li><div class="l"><b>Dès le 13e mois</b><span>Votre prix, ensuite il ne bouge plus</span></div><div class="p">79 €<small> HT/mois</small></div></li>
+          </ul>
+          <p class="founder"><b>Offre fondateur :</b> pour les 10 premières entreprises, le tarif est bloqué tant que vous restez client. En échange, on vous demande votre avis après 30 jours.</p>
+        </div>
+        <div class="side">
+          <ul class="incl">
+            <li>Devis illimités</li>
+            <li>Installé sur votre site par nos soins</li>
+            <li>Vos tarifs, votre logo, vos conditions</li>
+            <li>Copie de chaque demande avec les coordonnées</li>
+            <li>Modifications de grille incluses</li>
+            <li>Un interlocuteur en Île-de-France</li>
+            <li>Résiliable à tout moment, par simple email</li>
+          </ul>
+          <a href="#contact" class="btn btn-light" data-cta="pricing">Démarrer mon mois offert</a>
+          <small>Aucune carte bancaire pour le mois offert.</small>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="signature">
     <div class="wrap">
-      <blockquote>Vous ne vous inscrivez pas à un logiciel. Vous rejoignez les entreprises de nettoyage qui ont <em>arrêté de perdre du temps</em> sur des prospects non qualifiés.</blockquote>
+      <blockquote>« Vous ne vous inscrivez pas à un logiciel. Vous arrêtez de perdre du temps sur des prospects <em>qui ne signeront jamais.</em> »</blockquote>
     </div>
   </section>
 
-  <section class="demo wrap" id="demo">
-    <h2>Voir comment ça marche sur <em>votre activité.</em></h2>
-    <p class="lead">Dix minutes, sans engagement. Premier mois offert.</p>
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="kicker">Questions</span>
+        <h2>Ce qu'on nous demande <em>avant de signer.</em></h2>
+      </div>
+      <div class="faq">
+        <details><summary>Il me faut quoi ?</summary><p>Un site web (WordPress, Wix, site fait par un prestataire…) et votre grille de prix. On s'occupe de l'installation. Pas de site ? Le formulaire peut aussi être partagé par un lien sur votre fiche Google ou vos réseaux : parlons-en.</p></details>
+        <details><summary>Ce sont bien mes prix ?</summary><p>Oui. On configure votre propre grille : prestations, prix unitaires, suppléments (taches, odeurs, animaux…). Le devis reprend exactement vos prix, à votre nom.</p></details>
+        <details><summary>Et les gros chantiers de bureaux ?</summary><p>Pour un contrat de bureaux ou multisite, la visite reste utile. Quotepilote donne alors une fourchette de prix et trie les demandes : vous ne vous déplacez que chez ceux pour qui le budget colle.</p></details>
+        <details><summary>Quelle différence avec un logiciel de gestion ?</summary><p>Les logiciels de gestion vous aident à faire vos devis plus vite, souvent avec un engagement de 12 mois. Quotepilote fait une seule chose : votre client obtient son devis tout seul, sur votre site. Vous gardez vos outils actuels, sans engagement.</p></details>
+        <details><summary>Je peux arrêter quand ?</summary><p>Quand vous voulez, par simple email. Le premier mois est offert, ensuite c'est mensuel, sans engagement.</p></details>
+        <details><summary>Les données sont-elles protégées ?</summary><p>Vous recevez chaque demande par email. La base de données est hébergée dans l'Union européenne et les données de vos clients ne sont jamais revendues. Détails dans la <a href="/confidentialite" style="text-decoration:underline">politique de confidentialité</a>.</p></details>
+      </div>
+    </div>
+  </section>
 
-    <form id="demo-form" action="https://formspree.io/f/xeajvlen" method="POST">
-      <div>
-        <label for="company">Nom de l'entreprise</label>
-        <input type="text" id="company" name="company" placeholder="Ex. Prestige Propre" required>
+  <!-- CONTACT -->
+  <section id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="demo-box">
+        <div>
+          <span class="kicker">Passer à l'action</span>
+          <h2>On l'installe sur <em>votre site.</em></h2>
+          <p class="lead">Laissez vos coordonnées : on vous rappelle sous 24 h ouvrées pour un appel de 15 minutes, avec un devis à votre nom et à vos tarifs.</p>
+          <div class="offer">
+            <div>Premier mois offert</div>
+            <div>Prix affiché, sans surprise</div>
+            <div>Sans engagement</div>
+            <div>Installation faite pour vous en 48 h</div>
+          </div>
+          <p class="contact-alt">Vous préférez écrire ? <a href="mailto:contact@quotepilote.fr" data-track="Contact">contact@quotepilote.fr</a></p>
+        </div>
+        <form class="cf" id="contact-form" action="https://formspree.io/f/xeajvlen" method="POST">
+          <div class="f-grid">
+            <div><label for="f-name">Votre nom</label><input id="f-name" name="nom" required autocomplete="name"></div>
+            <div><label for="f-company">Entreprise</label><input id="f-company" name="entreprise" required autocomplete="organization"></div>
+            <div><label for="f-role">Votre rôle</label>
+              <select id="f-role" name="role" required>
+                <option value="" disabled selected>Choisir…</option>
+                <option>Gérant / dirigeant</option><option>Associé</option><option>Responsable commercial</option><option>Autre</option>
+              </select></div>
+            <div><label for="f-size">Effectif</label>
+              <select id="f-size" name="effectif" required>
+                <option value="" disabled selected>Choisir…</option>
+                <option>Seul</option><option>2 à 5</option><option>6 à 20</option><option>21 à 50</option><option>Plus de 50</option>
+              </select></div>
+            <div class="m-full"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="vous@entreprise.fr"></div>
+            <div class="m-full"><label for="f-phone">Téléphone</label><input id="f-phone" name="telephone" type="tel" required autocomplete="tel" placeholder="06 00 00 00 00"></div>
+            <div class="m-full"><label for="f-site">Site web de l'entreprise</label><input id="f-site" name="site_web" type="text" inputmode="url" placeholder="www.votre-entreprise.fr"></div>
+            <div class="m-full"><label for="f-vol">Demandes de devis par mois</label>
+              <select id="f-vol" name="devis_par_mois">
+                <option>Moins de 10</option><option selected>10 à 30</option><option>30 à 100</option><option>Plus de 100</option>
+              </select></div>
+          </div>
+          <input type="hidden" name="_subject" value="Quotepilote — demande de rappel (mois offert)">
+          <input type="hidden" name="type" value="Demande de rappel">
+          <input type="hidden" name="source" class="utm-src" value="site">
+          <div class="hp" aria-hidden="true"><label for="f-hp">Ne pas remplir</label><input id="f-hp" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+          <button type="submit" class="btn btn-primary" id="contact-submit">Être rappelé et démarrer le mois offert</button>
+          <p class="form-msg" id="contact-msg" role="status" aria-live="polite"></p>
+          <p class="legal-note">Vos informations servent uniquement à vous recontacter au sujet de Quotepilote. <a href="/confidentialite">Confidentialité</a>.</p>
+        </form>
       </div>
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="vous@entreprise.fr" required>
-      </div>
-      <div>
-        <label for="phone">Téléphone</label>
-        <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00" required>
-      </div>
-      <input type="hidden" name="_subject" value="Nouvelle demande de démo Quotepilote">
-      <button type="submit">Je veux voir la démo</button>
-    </form>
-    <p class="form-status" id="form-status"></p>
-    <p class="form-note">Vos informations ne sont utilisées que pour vous recontacter au sujet de la démo.</p>
+    </div>
   </section>
 </main>
 
-<footer class="wrap">
-  <div class="brand">Quotepilote</div>
-  <nav class="foot-links">
-    <a href="#" id="legal-link">Mentions légales</a>
-    <a href="mailto:contact@quotepilote.fr">Contact</a>
-  </nav>
-  <div>© 2026 Quotepilote</div>
+<footer class="foot">
+  <div class="wrap">
+    <a href="/" class="logo"><span class="logo-mark">Q</span>Quotepilote</a>
+    <nav aria-label="Liens légaux">
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/confidentialite">Confidentialité</a>
+      <button type="button" id="cookie-settings">Gérer les cookies</button>
+      <a href="mailto:contact@quotepilote.fr" data-track="Contact">contact@quotepilote.fr</a>
+    </nav>
+    <div>© 2026 Quotepilote</div>
+  </div>
 </footer>
 
-<div id="legal-modal">
-  <div class="legal-box">
-    <h3>Mentions légales</h3>
-    <p><strong>Éditeur :</strong> [Votre nom / nom de la micro-entreprise]</p>
-    <p><strong>Statut :</strong> Micro-entrepreneur</p>
-    <p><strong>SIRET :</strong> [À compléter]</p>
-    <p><strong>Adresse :</strong> [À compléter]</p>
-    <p><strong>Hébergement :</strong> Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA</p>
-    <p><strong>Contact :</strong> contact@quotepilote.fr</p>
-    <span class="legal-close" id="legal-close">Fermer</span>
+<div class="sticky-cta" id="sticky-cta"><a href="#demo" class="btn btn-primary" data-cta="sticky">Tester la démo gratuite</a></div>
+
+<div class="cookie" id="cookie" role="dialog" aria-label="Cookies">
+  <p>On utilise un cookie de mesure (Meta) pour savoir quelles publicités amènent des entreprises intéressées. Rien n'est déposé sans votre accord. <a href="/confidentialite#cookies">En savoir plus</a></p>
+  <div class="cb">
+    <button class="btn btn-neutral" type="button" id="cookie-no">Refuser</button>
+    <button class="btn btn-neutral" type="button" id="cookie-yes">Accepter</button>
   </div>
 </div>
 
-<script>
-  // Legal modal
-  const legalLink = document.getElementById('legal-link');
-  const legalModal = document.getElementById('legal-modal');
-  const legalClose = document.getElementById('legal-close');
-  legalLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    legalModal.classList.add('open');
-  });
-  legalClose.addEventListener('click', () => legalModal.classList.remove('open'));
-  legalModal.addEventListener('click', (e) => {
-    if (e.target === legalModal) legalModal.classList.remove('open');
-  });
-
-  // Form submission feedback (Formspree endpoint is set in the form action)
-  const form = document.getElementById('demo-form');
-  const status = document.getElementById('form-status');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    status.textContent = "Envoi en cours...";
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        status.textContent = "Merci ! On vous recontacte très vite.";
-        status.style.color = '#C9A24B';
-        if (typeof fbq === 'function') { fbq('track', 'Lead'); }
-        form.reset();
-      } else {
-        status.textContent = "Un souci est survenu, réessayez ou écrivez-nous directement.";
-        status.style.color = '#e07a5f';
-      }
-    } catch (err) {
-      status.textContent = "Un souci est survenu, réessayez ou écrivez-nous directement.";
-      status.style.color = '#e07a5f';
-    }
-  });
-</script>
-
+<script src="/assets/consent.js?v=9"></script>
+<script src="/assets/app.js?v=9"></script>
 </body>
 </html>
