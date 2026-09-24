@@ -1,7 +1,7 @@
 /* Quotepilote — page d'accueil : démo en direct (demande → inscription → devis envoyé) */
 (function () {
-  // Webhook n8n du flux DÉMO (séparé du flux de production de Prestige Propre).
-  var DEMO_WEBHOOK = 'https://universe21.app.n8n.cloud/webhook/demo-devis';
+  // Webhook n8n (flux générique : la grille et le nom viennent du client_id demo-001 dans Supabase).
+  var DEMO_WEBHOOK = 'https://universe21.app.n8n.cloud/webhook/devis';
   var DEMO_CLIENT_ID = 'demo-001';
   var MAX_DEMOS_PER_DAY = 3;
   var GRILLE = { 'Fauteuil': 40, 'Canapé 2/3 places': 60, 'Canapé 4/5 places': 70, 'Canapé en U': 80, 'Chaises (lot de 4/6)': 50, 'Pouf': 19 };
