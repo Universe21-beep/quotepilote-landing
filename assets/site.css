@@ -277,3 +277,18 @@ body:has(.cookie.show) .sticky-cta{display:none!important}
 .hero h1{margin-top:0}
 .hero h1 .h1-kicker{display:block;margin-bottom:18px;font:400 16px/1.6 var(--sans);letter-spacing:normal;text-wrap:wrap}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.article-page .breadcrumb ol{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px;font-size:13.5px;color:var(--muted)}
+.article-page .breadcrumb li{margin:0;font-size:13.5px;color:var(--muted)}
+.article-page .breadcrumb li+li::before{content:"›";margin-right:6px;color:var(--muted)}
+.article-page .breadcrumb a{color:var(--brand-2)}
+.article-page .byline{font-size:13.5px;color:var(--muted);margin-bottom:22px}
+.article-page h3{font-size:19px;margin:22px 0 8px}
+.article-page ol{padding-left:22px}
+.article-page .see-also{font-size:14.5px}
+.article-page .field-note{background:var(--mint);border-left:4px solid var(--brand-2);border-radius:10px;padding:16px 18px;margin:18px 0}
+.article-page .field-note p{color:var(--brand);margin-bottom:6px}
+.article-page .field-note .field-note-title{font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:12.5px;color:var(--brand-2)}
+.article-page .promo{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:28px 0}
+footer.foot .foot-res{margin-bottom:18px}
+footer.foot .foot-res nav{display:flex;gap:8px 20px;flex-wrap:wrap;align-items:center}
+footer.foot .foot-res-title{font-weight:600;color:var(--ink-2)}
