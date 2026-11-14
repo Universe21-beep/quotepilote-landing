@@ -1,0 +1,20 @@
+# Quotepilote
+
+> Quotepilote (une activité de Mellah Group) crée des automatisations sur mesure pour les entreprises de nettoyage d'Île-de-France (PME de 10 à 150 salariés). Ce n'est pas le logiciel américain « QuotePilot ».
+
+## Ce que fait Quotepilote
+- Remplacement automatique des agents absents : l'agent signale son absence par SMS, les remplaçants disponibles qui connaissent le site sont prévenus par SMS, et le premier qui répond OUI prend le poste. Le gérant n'est alerté que si personne n'est trouvé.
+- Planning envoyé chaque jour : chaque agent reçoit son planning de la semaine et du lendemain par SMS et le confirme ; les non-réponses sont relancées.
+- Devis préparés avec les prix de l'entreprise, validés en un clic par le gérant avant l'envoi, avec relances automatiques.
+- Recherche de chantiers et d'appels d'offres de nettoyage dans la zone du client, et préparation des dossiers de réponse.
+- Toute autre tâche répétitive, sur mesure, en s'ajoutant aux outils existants (Excel, WhatsApp, logiciel métier). Rien à installer pour les agents.
+
+## Pour qui
+Gérants d'entreprises de nettoyage et de propreté en Île-de-France (Paris, 77, 78, 91, 92, 93, 94, 95) : bureaux, copropriétés, hôtels, collectivités.
+
+## Prix et contact
+Prix sur devis après un premier échange gratuit de 15 minutes.
+- Site : https://quotepilote.fr
+- Prise de rendez-vous : https://quotepilote.fr/#rdv
+- Téléphone : 07 59 54 71 63
+- Email : quotepilote@outlook.fr
